@@ -8,10 +8,6 @@ var start_button = document.getElementById('start'),
     choix_IA = 0,
     tentatives = 10;
 
-function log(what) {
-    console.log(what);
-}
-
 function playStartAnimations() {
     start_button.classList.remove('start-in-anim');
     start_button.classList.add('start-out-anim');
@@ -108,7 +104,6 @@ start_button.addEventListener('click', function() {
    playStartAnimations();
    choix_IA = 1;
    choix_IA = Math.floor(Math.random() * 100) + 1;
-   console.log(choix_IA);
    start_button.disabled = 'true';
 });
 
@@ -136,7 +131,6 @@ function startGame(e) {
     }
 
     input_joueur_array.push(input_joueur);
-    log(input_joueur_array);
     displayInput();
 
     compareResults();

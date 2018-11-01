@@ -116,11 +116,12 @@ body {
 }
 
 #input-field #choix-precedents {
+    margin-top: 2rem;
     text-align: center;
 }
 
-#input-field #choix-precedents p:first-child {
-    margin-top: 2rem;
+#input-field p {
+    margin-top: .5rem;
     font-size: 1.4rem;
 }
 

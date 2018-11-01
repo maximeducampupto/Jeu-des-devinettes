@@ -2,7 +2,7 @@ var start_button = document.getElementById('start'),
     input_field = document.getElementById('input-field'),
     compare_button = document.getElementById('compare'),
     body = document.getElementsByTagName('body')[0],
-    choix_container = document.getElementById('choix-precedents'),
+    choix_container = document.getElementById('choix-container'),
     input_joueur = 0,
     input_joueur_array = [],
     choix_IA = 0,
@@ -47,13 +47,6 @@ function removePreviousAlerts() {
     }
 }
 
-function displayInput() {
-    var choix = document.createElement('p');
-    choix.textContent = input_joueur_array[input_joueur_array.length - 1];
-
-    choix_container.appendChild(choix);
-}
-
 function throwAlert(message) {
     var alert_container = document.createElement('div'),
         alert_message = document.createElement('p');
@@ -65,8 +58,14 @@ function throwAlert(message) {
     body.appendChild(alert_container);
 }
 
+function displayChoix() {
+    choix_container.innerHTML += (input_joueur_array[input_joueur_array.length - 1]).toString() + ', ';
+}
+
 function resetGame() {
     playResetAnimations();
+    choix_container.innerHTML = 'Choix Précédents: ';
+
     start_button.innerHTML = 'Rejouer?';
     start_button.disabled = false;
     tentatives = 10;
@@ -102,9 +101,8 @@ function compareResults() {
 
 start_button.addEventListener('click', function() {
    playStartAnimations();
-   choix_IA = 1;
    choix_IA = Math.floor(Math.random() * 100) + 1;
-   start_button.disabled = 'true';
+   start_button.disabled = true;
 });
 
 function startGame(e) {
@@ -131,7 +129,7 @@ function startGame(e) {
     }
 
     input_joueur_array.push(input_joueur);
-    displayInput();
+    displayChoix();
 
     compareResults();
 }

@@ -1,7 +1,6 @@
 var start_button = document.getElementById('start'),
     input_field = document.getElementById('input-field'),
     compare_button = document.getElementById('compare'),
-    body = document.getElementsByTagName('body')[0],
     choix_container = document.getElementById('choix-container'),
     input_joueur = 0,
     input_joueur_array = [],
@@ -31,9 +30,9 @@ function removePreviousHelpers() {
     var helpers = document.getElementsByClassName('helper');
 
     if (helpers.length > 0) {
-        Array.from(helpers).forEach(function(div) {
-           div.remove();
-        });
+       for (var i = 0; i < helpers.length; i++) {
+           helpers[i].remove();
+       }
     }
 }
 
@@ -41,9 +40,9 @@ function removePreviousAlerts() {
     var alerts = document.getElementsByClassName('alert');
 
     if (alerts.length > 0) {
-        Array.from(alerts).forEach(function(div) {
-            div.remove();
-        });
+        for (var i = 0; i < alerts.length; i++) {
+            alerts[i].remove();
+        }
     }
 }
 
@@ -55,7 +54,7 @@ function throwAlert(message) {
     alert_message.textContent = message;
 
     alert_container.appendChild(alert_message);
-    body.appendChild(alert_container);
+    document.body.appendChild(alert_container);
 }
 
 function displayChoix() {
@@ -96,7 +95,7 @@ function compareResults() {
     helper_container.appendChild(helper_message);
     helper_container.appendChild(helper_tentatives);
     helper_container.appendChild(helper_speech);
-    body.appendChild(helper_container);
+    document.body.appendChild(helper_container);
 }
 
 start_button.addEventListener('click', function() {
@@ -117,6 +116,13 @@ function startGame(e) {
     }
 
     input_joueur = document.getElementById('input-joueur').value;
+
+    if (input_joueur == '') {
+        tentatives++;
+        throwAlert("Veuillez préciser votre choix");
+        alert(tentatives);
+        return;
+    }
 
     if (isNaN(input_joueur)) {
         throwAlert('Veuillez entrer un nombre compris entre 1 et 100');
